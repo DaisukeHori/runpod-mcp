@@ -28,6 +28,12 @@ import { registerJobCancel } from "./tools/job-cancel";
 import { registerGpuTypes } from "./tools/gpu-types";
 import { registerAccountInfo } from "./tools/account-info";
 
+// CLI (runpodctl) ラッパー
+import { registerCliSendFile } from "./tools/cli-send-file";
+import { registerCliReceiveFile } from "./tools/cli-receive-file";
+import { registerCliSshAddKey, registerCliSshConnect } from "./tools/cli-ssh";
+import { registerCliDoctor } from "./tools/cli-doctor";
+
 /**
  * MCP サーバーに全ツールを登録する
  */
@@ -54,4 +60,11 @@ export function registerAllTools(server: McpServer) {
   // GPU・アカウント情報
   registerGpuTypes(server);
   registerAccountInfo(server);
+
+  // CLI (runpodctl) ラッパー
+  registerCliSendFile(server);
+  registerCliReceiveFile(server);
+  registerCliSshAddKey(server);
+  registerCliSshConnect(server);
+  registerCliDoctor(server);
 }
