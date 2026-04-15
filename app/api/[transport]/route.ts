@@ -15,12 +15,17 @@ const handler = createMcpHandler(
   (server) => {
     registerAllTools(server);
   },
-  {},
+  {
+    serverInfo: {
+      name: "runpod-mcp",
+      version: "1.0.0",
+    },
+  },
   {
     basePath: "/api",
     maxDuration: 60,
-    verboseLogs: process.env.NODE_ENV === "development",
+    verboseLogs: true,
   }
 );
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST, handler as DELETE };
