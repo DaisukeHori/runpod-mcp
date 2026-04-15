@@ -11,6 +11,11 @@
 import { createMcpHandler } from "mcp-handler";
 import { registerAllTools } from "@/lib/mcp/server";
 
+// Vercel Serverless 上で Node.js ランタイムを明示する
+// (Edge ランタイムでは MCP SDK が依存する Node API が利用できないため)
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 const handler = createMcpHandler(
   (server) => {
     registerAllTools(server);
@@ -23,4 +28,6 @@ const handler = createMcpHandler(
   }
 );
 
-export { handler as GET, handler as POST };
+// MCP Streamable HTTP は GET / POST / DELETE を利用する
+// (DELETE はセッション終了で使われるため、Next.js のルートからも公開する)
+export { handler as GET, handler as POST, handler as DELETE };
